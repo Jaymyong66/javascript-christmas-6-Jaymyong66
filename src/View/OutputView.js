@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { addCommasToNumber } from '../utils/priceFormat.js';
+import { expectedCalculatePayment } from '../utils/expectedCalculatePayment.js';
 
 const OutputView = {
   printdate(date) {
@@ -56,12 +57,9 @@ const OutputView = {
 
   printPayment(totalPrice, totalDiscount, isPresent) {
     Console.print(`\n<할인 후 예상 결제 금액>`);
-    if (isPresent) {
-      Console.print(`${addCommasToNumber(totalPrice - totalDiscount + 25000)}원`);
-    }
-    else {
-      Console.print(`${addCommasToNumber(totalPrice - totalDiscount)}원`);
-    }
+    const payment = expectedCalculatePayment(totalPrice, totalDiscount, isPresent);
+    Console.print(`${addCommasToNumber(payment)}원`);
+    
   },
   
   printBadge(badge) {
