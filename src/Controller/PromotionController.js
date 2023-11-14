@@ -1,10 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
-import InputView from './View/InputView.js';
-import Order from './Model/Order.js';
-import OutputView from './View/OutputView.js';
-import { MENUS } from './constants/menus.js';
-import Discount from './Model/Discount.js';
-import Badge from './Model/Badge.js';
+import InputView from '../View/InputView.js';
+import Order from '../Model/Order.js';
+import OutputView from '../View/OutputView.js';
+import { MENUS } from '../constants/menus.js';
+import Discount from '../Model/Discount.js';
+import Badge from '../Model/Badge.js';
 
 class PromotionController {
   #date;

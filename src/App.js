@@ -1,4 +1,4 @@
-import PromotionController from './PromotionController.js';
+import PromotionController from './Controller/PromotionController.js';
 
 class App {
   #promotionController;
