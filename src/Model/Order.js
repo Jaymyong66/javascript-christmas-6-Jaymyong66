@@ -1,6 +1,4 @@
-import { Console } from '@woowacourse/mission-utils';
 import { FOODS, MENUS } from '../constants/menus.js';
-import OutputView from '../View/OutputView.js';
 
 class Order {
   #menuList = [];
@@ -69,7 +67,6 @@ class Order {
     if (this.#totalPrice >= 120000) {
       this.#isPresent = 1;
     }
-    // OutputView.printPresent(this.#isPresent);
   }
 
   async #calculatePrice() {
@@ -87,7 +84,6 @@ class Order {
         }
       }
     }
-    // OutputView.printBeforeTotalPrice(this.#totalPrice);
     this.#calculatePresent();
   }
 

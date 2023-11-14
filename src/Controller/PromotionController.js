@@ -32,7 +32,7 @@ class PromotionController {
     OutputView.printMenu(this.#order);
     OutputView.printBeforeTotalPrice(this.#order.getTotalPrice());
     OutputView.printPresent(this.#order.getIsPresent());
-    await this.judgeDiscount();
+    await this.calculateDiscount();
     await this.calculatePayment();
     await this.calculateBadge();
   }
@@ -56,22 +56,6 @@ class PromotionController {
     OutputView.printTotalBenefit(this.#discount.getTotalDiscount());
   }
 
-  async notDiscount() {
-    this.#discount = new Discount(this.#order, '0');
-    await this.#discount.calculateDiscount();
-    OutputView.printBenefit(this.#discount.getDiscount());
-    OutputView.printTotalBenefit(this.#discount.getTotalDiscount());
-  }
-
-  async judgeDiscount() {
-    const totalPrice = this.#order.getTotalPrice();
-    if ((totalPrice < 10000)) { 
-      await this.notDiscount();
-    }
-    else {
-      await this.calculateDiscount();
-    }
-   }
 
   async calculatePayment() {
     const totalPrice = this.#order.getTotalPrice();
