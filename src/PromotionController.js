@@ -9,6 +9,7 @@ import Badge from './Model/Badge.js';
 class PromotionController {
   #date;
   #order;
+  #discount;
 
   constructor() {
     
@@ -28,10 +29,10 @@ class PromotionController {
     await this.reInput(() => this.inputOrder());
     OutputView.printdate(this.#date);
     OutputView.printMenu(this.#order);
-    //await this.#order.calculatePrice();
     OutputView.printBeforeTotalPrice(this.#order.getTotalPrice());
     OutputView.printPresent(this.#order.getIsPresent());
-    
+    await this.judgeDiscount();
+    await this.calculatePayment();
   }
 
 
@@ -45,6 +46,37 @@ class PromotionController {
     this.#order = new Order(orederInput);
   }
 
+
+  async calculateDiscount() {
+    this.#discount = new Discount(this.#order, this.#date);
+    await this.#discount.calculateDiscount();
+    OutputView.printBenefit(this.#discount.getDiscount());
+    OutputView.printTotalBenefit(this.#discount.getTotalDiscount());
+  }
+
+  async notDiscount() {
+    this.#discount = new Discount(this.#order, '0');
+    await this.#discount.calculateDiscount();
+    OutputView.printBenefit(this.#discount.getDiscount());
+    OutputView.printTotalBenefit(this.#discount.getTotalDiscount());
+  }
+
+  async judgeDiscount() {
+    const totalPrice = this.#order.getTotalPrice();
+    if ((totalPrice < 10000)) { 
+      await this.notDiscount();
+    }
+    else {
+      await this.calculateDiscount();
+    }
+   }
+
+  async calculatePayment() {
+    const totalPrice = this.#order.getTotalPrice();
+    const totalDiscount = this.#discount.getTotalDiscount();
+    const isPresent = this.#order.getIsPresent();
+    OutputView.printPayment(totalPrice,totalDiscount,isPresent);
+  }
 
 
   getOrders() {

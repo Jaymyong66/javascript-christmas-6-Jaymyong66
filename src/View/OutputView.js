@@ -31,7 +31,38 @@ const OutputView = {
     }
   },
 
-  
+  printBenefit(discounts) {
+    const discountKeys = Object.keys(discounts);
+    Console.print(`\n<혜택 내역>`);
+    if (Object.values(discounts).every(value => value === 0)) { 
+      Console.print(`없음`);
+      return;
+    }
+    discountKeys.forEach(key => {
+      if (discounts[key] !== 0) {
+        Console.print(`${key} : -${addCommasToNumber(discounts[key])}원`);
+      }
+    });
+  },
+
+  printTotalBenefit(totalDiscount) {
+    Console.print(`\n<총혜택 금액>`);
+    if (totalDiscount === 0) {
+      Console.print(`0원`);
+      return;
+    }
+    Console.print(`-${addCommasToNumber(totalDiscount)}원`);
+  },
+
+  printPayment(totalPrice, totalDiscount, isPresent) {
+    Console.print(`\n<할인 후 예상 결제 금액>`);
+    if (isPresent) {
+      Console.print(`${addCommasToNumber(totalPrice - totalDiscount + 25000)}원`);
+    }
+    else {
+      Console.print(`${addCommasToNumber(totalPrice - totalDiscount)}원`);
+    }
+  },
 };
 
 export default OutputView;

@@ -1,3 +1,4 @@
+import Discount from '../src/Model/Discount';
 import Order from '../src/Model/Order';
 
 describe("도메인 테스트", () => { 
@@ -26,6 +27,28 @@ describe("도메인 테스트", () => {
       const isPresent = order.getIsPresent();
       //then
       expect(isPresent).toEqual(expected);
+    })
+  })
+
+  describe("Discount 로직 테스트", () => { 
+    //given
+    const discountCases = [
+      {input: "양송이수프-1", expected: {
+          '크리스마스 디데이 할인': 0,
+          '평일 할인': 0,
+          '주말 할인': 0,
+          '특별 할인': 0,
+          '증정 이벤트': 0,
+        }},
+    ];
+    test.each(discountCases)('혜택 내역 테스트', async ({ input,expected }) => {
+      //when
+      const order = new Order(input);
+      const date = '3';
+      const discount = new Discount(order, date);
+      const totalDiscount = discount.getDiscount();
+      //then
+      expect(totalDiscount).toEqual(expected);
     })
   })
 
