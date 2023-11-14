@@ -63,9 +63,21 @@ class Order {
   }
   
 
-  async #calculatePresent() { // todo : 증정 메뉴 모델 분리?
+  async #calculatePresent() { 
     if (this.#totalPrice >= 120000) {
       this.#isPresent = 1;
+    }
+  }
+
+  async #setTotalPrice(category, menus) {
+    for (let j = 0; j < menus.length; j++) {
+      const menu = menus[j];
+      if (this.#menuList.includes(menu)) {
+        const price = MENUS[category][menu];
+        const index = this.#menuList.indexOf(menu);
+        const count = this.#countList[index];
+        this.#totalPrice += price * count;
+      }
     }
   }
 
@@ -74,15 +86,7 @@ class Order {
     for (let i = 0; i < categorys.length; i++) {
       const category = categorys[i];
       const menus = Object.keys(MENUS[category]);
-      for (let j = 0; j < menus.length; j++) {
-        const menu = menus[j];
-        if (this.#menuList.includes(menu)) {
-          const price = MENUS[category][menu];
-          const index = this.#menuList.indexOf(menu);
-          const count = this.#countList[index];
-          this.#totalPrice += price * count;
-        }
-      }
+      this.#setTotalPrice(category,menus);
     }
     this.#calculatePresent();
   }
