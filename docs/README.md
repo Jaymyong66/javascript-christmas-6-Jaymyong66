@@ -88,7 +88,29 @@
 
 ```
  root
+ |---__tests__
+     |--- ApplicationTest.js
+     |--- DomainTest.js
+     |--- InputTest.js
+ |---docs
+     |--- README.md
  |---src
+     |--- constants
+          |--- menus.js
+     |--- Controller
+          |--- PromotionController.js
+     |--- Model
+          |--- Badge.js
+          |--- Discount.js
+          |--- Oreder.js
+     |--- utils
+          |--- menuDiscountCalculator.js
+          |--- priceFormat.js
+     |--- validator
+          |--- inputValidator.js
+     |--- View
+          |--- InputView.js
+          |--- OutputView.js
      |--- App.js
      |--- index.js
 ```
@@ -97,16 +119,24 @@
 
 ```
 module.exports = {
-  extends: ['airbnb', 'plugin:prettier/recommended'],
+  extends: ["airbnb", "plugin:prettier/recommended"],
   rules: {
-    'prettier/prettier': ['error', { endOfLine: 'auto' }],
-    'operator-linebreak': ['error', 'before'],
-    'max-depth': ['error', 2],
+    "prettier/prettier": ["error", { endOfLine: "auto" }],
+    "operator-linebreak": ["error", "before"],
+    "max-depth": ["error", 2],
+    'no-var': 2,
+    'prefer-const': 2,
+    'no-undef': 2,
+    'no-unused-vars': 2,
+    'max-lines-per-function': ['error', 15],
   },
-  'import/extensions': ['error', 'ignorePackages', {
-    js: 'never',
-  }],
-  },
+  "import/extensions": [
+    "error",
+    "ignorePackages",
+    {
+      js: "never",
+    },
+  ],
 };
 ```
 
