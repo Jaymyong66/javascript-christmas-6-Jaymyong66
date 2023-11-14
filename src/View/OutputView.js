@@ -63,6 +63,15 @@ const OutputView = {
       Console.print(`${addCommasToNumber(totalPrice - totalDiscount)}원`);
     }
   },
+  
+  printBadge(badge) {
+    Console.print(`\n<12월 이벤트 배지>`);
+    if (badge === '') {
+      Console.print(`없음`);
+      return;
+    }
+    Console.print(`${badge}`);
+  }
 };
 
 export default OutputView;

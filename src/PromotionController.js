@@ -10,6 +10,7 @@ class PromotionController {
   #date;
   #order;
   #discount;
+  #badge;
 
   constructor() {
     
@@ -33,6 +34,7 @@ class PromotionController {
     OutputView.printPresent(this.#order.getIsPresent());
     await this.judgeDiscount();
     await this.calculatePayment();
+    await this.calculateBadge();
   }
 
 
@@ -78,6 +80,11 @@ class PromotionController {
     OutputView.printPayment(totalPrice,totalDiscount,isPresent);
   }
 
+  async calculateBadge() {
+    const totalDiscount = this.#discount.getTotalDiscount();
+    this.#badge = new Badge(totalDiscount);
+    OutputView.printBadge(this.#badge.getBadge());
+  }
 
   getOrders() {
     return this.#order;
