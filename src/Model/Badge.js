@@ -1,6 +1,6 @@
 class Badge {
   #totalDiscount = 0;
-  #badge = '';
+  #badge = '없음';
 
   constructor(totalDiscount) { 
     this.#totalDiscount = totalDiscount;

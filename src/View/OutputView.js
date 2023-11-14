@@ -64,10 +64,6 @@ const OutputView = {
   
   printBadge(badge) {
     Console.print(`\n<12월 이벤트 배지>`);
-    if (badge === '') {
-      Console.print(`없음`);
-      return;
-    }
     Console.print(`${badge}`);
   }
 };
