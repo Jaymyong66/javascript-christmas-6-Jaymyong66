@@ -1,7 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
+import InputView from './View/InputView.js';
 
 
 class PromotionController {
+  #date;
 
 
   constructor() {
@@ -18,9 +20,15 @@ class PromotionController {
   }
 
   async run() {
-    
+    await this.reInput(() => this.inputDate());
+
   }
 
+
+  async inputDate() {
+    const input = await InputView.readDate();
+    this.#date = input;
+  }
 
   
 }
