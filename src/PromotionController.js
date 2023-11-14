@@ -28,7 +28,9 @@ class PromotionController {
     await this.reInput(() => this.inputOrder());
     OutputView.printdate(this.#date);
     OutputView.printMenu(this.#order);
-    await this.#order.calculatePrice();
+    //await this.#order.calculatePrice();
+    OutputView.printBeforeTotalPrice(this.#order.getTotalPrice());
+    OutputView.printPresent(this.#order.getIsPresent());
     
   }
 
@@ -42,6 +44,7 @@ class PromotionController {
     const orederInput = await InputView.readMenu();
     this.#order = new Order(orederInput);
   }
+
 
 
   getOrders() {

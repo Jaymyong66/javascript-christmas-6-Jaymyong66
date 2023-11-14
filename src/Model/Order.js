@@ -19,6 +19,7 @@ class Order {
       this.#countList.push(count);
     });
     this.#validateBeverageOnly(this.#menuList);
+    this.#calculatePrice();
   }
 
   #validateElement(menu, count) {
@@ -57,23 +58,21 @@ class Order {
     let presentMenuCount = countList.reduce((accumulator, currentValue) => {
       return accumulator + currentValue;
     }, 0);
-    Console.print('presentMenuCount : '+presentMenuCount)
     presentMenuCount += count;
-    Console.print('presentMenuCount : '+presentMenuCount)
     if (presentMenuCount >= 21) {
       throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
     }
   }
   
 
-  async calculatePresent() { // todo : 증정 메뉴 모델 분리?
+  async #calculatePresent() { // todo : 증정 메뉴 모델 분리?
     if (this.#totalPrice >= 120000) {
       this.#isPresent = 1;
     }
-    OutputView.printPresent(this.#isPresent);
+    // OutputView.printPresent(this.#isPresent);
   }
 
-  async calculatePrice() {
+  async #calculatePrice() {
     const categorys = Object.keys(MENUS);
     for (let i = 0; i < categorys.length; i++) {
       const category = categorys[i];
@@ -88,8 +87,8 @@ class Order {
         }
       }
     }
-    OutputView.printBeforeTotalPrice(this.#totalPrice);
-    this.calculatePresent();
+    // OutputView.printBeforeTotalPrice(this.#totalPrice);
+    this.#calculatePresent();
   }
 
   getMenus() {

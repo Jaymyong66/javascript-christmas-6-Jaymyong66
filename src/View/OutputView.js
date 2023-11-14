@@ -15,6 +15,22 @@ const OutputView = {
     }
   },
 
+  printBeforeTotalPrice(totalPrice) {
+    Console.print(`\n<할인 전 총주문 금액>`);
+    totalPrice = addCommasToNumber(totalPrice);
+    Console.print(`${totalPrice}원\n`);
+  },
+
+  printPresent(isPresent) {
+    Console.print(`\n<증정 메뉴>`);
+    if (isPresent) {
+      Console.print(`샴페인 1개`);
+    }
+    else {
+      Console.print(`없음`);
+    }
+  },
+
   
 };
 
