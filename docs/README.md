@@ -34,32 +34,39 @@
 
 ### jest 파일 작성해보기
 
-- DomainTest.js
+- **DomainTest.js**
   
-  - Order 로직 테스트
+  - **Order 로직 테스트**
     - [x] 할인 전 총주문 금액 테스트
     - [x] 증정 메뉴 테스트
 
-  - Discount 로직 테스트
+  - **Discount 로직 테스트**
     - [x] 혜택 내역 테스트
+      - 크리스마스 디데이 할인
+      - 평일 할인
+      - 주말 할인
+      - 특별 할인
+      - 증정 이벤트
+  
     - [x] 총혜택 금액 테스트
+      - 할인 혜택 + 증정 이벤트 가격
     - [x] 할인 후 예상 결제 금액 테스트
   
-  - Badge 로직 테스트
+  - **Badge 로직 테스트**
     - [x] 12월 이벤트 배지 테스트
 
 
-- PrintTest.js
+- **PrintTest.js**
   - 츨력테스트
     - [ ]
 
-- InputTest.js
+- **InputTest.js**
 
-  - 입력 받은 예상 방문 날짜 테스트
+  - **입력 받은 예상 방문 날짜 테스트**
     - [x] 입력 받은 날짜가 숫자가 아닐 때
     - [x] 입력 받은 날짜가 1일 ~ 31일이 아닐 때
 
-  - 입력 받은 주문 테스트
+  - **입력 받은 주문 테스트**
     - [x] 입력한 메뉴가 제공하는 메뉴가 아닐 때
     - [x] 입력한 메뉴가 중복되었을 때
     - [x] 입력한 메뉴의 개수가 유효한 숫자가 아닐 때
@@ -93,31 +100,31 @@
 
 ```
  root
- |---__tests__
-     |--- ApplicationTest.js
-     |--- DomainTest.js
-     |--- InputTest.js
- |---docs
-     |--- README.md
- |---src
-     |--- constants
-          |--- menus.js
-     |--- Controller
-          |--- PromotionController.js
-     |--- Model
-          |--- Badge.js
-          |--- Discount.js
-          |--- Oreder.js
-     |--- utils
-          |--- menuDiscountCalculator.js
-          |--- priceFormat.js
-     |--- validator
-          |--- inputValidator.js
-     |--- View
-          |--- InputView.js
-          |--- OutputView.js
-     |--- App.js
-     |--- index.js
+ |---📂 __tests__
+     |--- 📄 ApplicationTest.js
+     |--- 📄 DomainTest.js
+     |--- 📄 InputTest.js
+ |---📂 docs
+     |--- 📄 README.md
+ |---📂 src
+     |--- 📂 constants
+          |--- 📄 menus.js
+     |--- 📂 Controller
+          |--- 📄 PromotionController.js
+     |--- 📂 Model
+          |--- 📄 Badge.js
+          |--- 📄 Discount.js
+          |--- 📄 Oreder.js
+     |--- 📂 utils
+          |--- 📄 menuDiscountCalculator.js
+          |--- 📄 priceFormat.js
+     |--- 📂 validator
+          |--- 📄 inputValidator.js
+     |--- 📂 View
+          |--- 📄 InputView.js
+          |--- 📄 OutputView.js
+     |--- 📄 App.js
+     |--- 📄 index.js
 ```
 
 ### eslint 사용해보기

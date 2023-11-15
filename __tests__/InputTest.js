@@ -75,11 +75,11 @@ describe("입력 테스트", () => {
       { input: "해산물파스타-2, 레드와-1"},
     ];
     test.each(invalidMenuCases)('입력한 메뉴가 제공하는 메뉴가 아닐 때', async ({ input }) => {
-      const INVALID_DATE_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
+      const INVALID_ORDER_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
       //when
       const newOrder = () => new Order(input);
       //then
-      expect(newOrder).toThrow(INVALID_DATE_MESSAGE);
+      expect(newOrder).toThrow(INVALID_ORDER_MESSAGE);
     })
 
     //given
@@ -90,11 +90,11 @@ describe("입력 테스트", () => {
       { input: "초코케이크-1, 레드와인-1, 초코케이크-2" },
     ];
     test.each(redundantMenuCases)('입력한 메뉴가 중복되었을 때', async ({ input }) => {
-      const INVALID_DATE_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
+      const INVALID_ORDER_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
       //when
       const newOrder = () => new Order(input);
       //then
-      expect(newOrder).toThrow(INVALID_DATE_MESSAGE);
+      expect(newOrder).toThrow(INVALID_ORDER_MESSAGE);
     })
     
     //given
@@ -108,11 +108,11 @@ describe("입력 테스트", () => {
       { input: "해산물파스타-2, 레드와인--1" },
     ];
     test.each(invalidMenuCountCases)('입력한 메뉴의 개수가 유효한 숫자가 아닐 때', async ({ input }) => {
-      const INVALID_DATE_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
+      const INVALID_ORDER_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
       //when
       const newOrder = () => new Order(input);
       //then
-      expect(newOrder).toThrow(INVALID_DATE_MESSAGE);
+      expect(newOrder).toThrow(INVALID_ORDER_MESSAGE);
     })
 
     //given
@@ -122,11 +122,11 @@ describe("입력 테스트", () => {
       { input: "해산물파스타-1,레드와인-2,양송이수프-20" },
     ];
     test.each(maxCountCases)('입력한 메뉴의 개수의 합이 20개가 넘을 때', async ({ input }) => {
-      const INVALID_DATE_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
+      const INVALID_ORDER_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
       //when
       const newOrder = () => new Order(input);
       //then
-      expect(newOrder).toThrow(INVALID_DATE_MESSAGE);
+      expect(newOrder).toThrow(INVALID_ORDER_MESSAGE);
     })
 
     //given
@@ -137,11 +137,11 @@ describe("입력 테스트", () => {
       { input: "레드와인-1,제로콜라-1,샴페인-1" },
     ];
     test.each(onlyBeverageCases)('음료만 주문 하였을 때', async ({ input }) => {
-      const INVALID_DATE_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
+      const INVALID_ORDER_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
       //when
       const newOrder = () => new Order(input);
       //then
-      expect(newOrder).toThrow(INVALID_DATE_MESSAGE);
+      expect(newOrder).toThrow(INVALID_ORDER_MESSAGE);
     })
 
     

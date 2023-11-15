@@ -1,6 +1,9 @@
+import BADGE from '../constants/badges.js';
+import MONEY from '../constants/money.js';
+
 class Badge {
-  #totalDiscount = 0;
-  #badge = '없음';
+  #totalDiscount = MONEY.zero;
+  #badge = BADGE.noBadge;
 
   constructor(totalDiscount) { 
     this.#totalDiscount = totalDiscount;
@@ -8,14 +11,14 @@ class Badge {
   }
 
   judgeBadge() {
-    if (this.#totalDiscount >= 5000) {
-      this.#badge = '별';
+    if (this.#totalDiscount >= BADGE.starPrice) {
+      this.#badge = BADGE.starBadge;
     }
-    if (this.#totalDiscount >= 10000) {
-      this.#badge = '트리';
+    if (this.#totalDiscount >= BADGE.treePrice) {
+      this.#badge = BADGE.treeBadge;
     }
-    if (this.#totalDiscount >= 20000) {
-      this.#badge = '산타';
+    if (this.#totalDiscount >= BADGE.santaPrice) {
+      this.#badge = BADGE.santaBadge;
     }
   }
 

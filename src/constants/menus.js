@@ -28,4 +28,13 @@ for (const category in MENUS) {
   }
 }
 
-export { MENUS, FOODS };
+const CATEGORIES = Object.freeze({
+  appetizer: '에피타이저',
+  main: '메인',
+  dessert: '디저트',
+  drink: '음료',
+})
+
+const MAX_MENU_COUNT = 21;
+
+export { MENUS, FOODS, CATEGORIES,MAX_MENU_COUNT };

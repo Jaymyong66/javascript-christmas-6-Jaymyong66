@@ -1,14 +1,15 @@
-import { MENUS } from '../constants/menus.js';
+import { CATEGORIES } from '../constants/menus.js';
+import MONEY from '../constants/money.js';
 import { menuDiscountCalculator } from '../utils/menuDiscountCalculator.js';
 
 class Discount {
   #order;
   #date;
-  #weekendDiscount = 0;
-  #weekdayDiscount = 0;
-  #specialDiscount = 0;
-  #christmasDiscount = 0;
-  #totalDiscount = 0;
+  #weekendDiscount = MONEY.zero;
+  #weekdayDiscount = MONEY.zero;
+  #specialDiscount = MONEY.zero;
+  #christmasDiscount = MONEY.zero;
+  #totalDiscount = MONEY.zero;
 
   constructor(order, date) {
     this.#order = order;
@@ -16,7 +17,7 @@ class Discount {
   }
 
   async calculateDiscount() {
-    const isDiscount = this.#order.getTotalPrice() >= 10000;
+    const isDiscount = this.#order.getTotalPrice() >= MONEY.minimunBenefitPrice;
     if (isDiscount) {
       await this.#calculateWeekendDiscount();
       await this.#calculateWeekdayDiscount();
@@ -29,7 +30,7 @@ class Discount {
 
   async #calculateWeekendDiscount() {
     if ((this.#date >= 1 && this.#date <= 2) || (this.#date >= 8 && this.#date <= 9) || (this.#date >= 15 && this.#date <= 16) || (this.#date >= 22 && this.#date <= 23) || (this.#date >= 29 && this.#date <= 30)) {
-      const discount = menuDiscountCalculator('메인', this.#order);
+      const discount = menuDiscountCalculator(CATEGORIES.main, this.#order);
       this.#weekendDiscount += discount;
     }
       
@@ -37,28 +38,28 @@ class Discount {
 
   async #calculateWeekdayDiscount() { 
     if ((this.#date >= 3 && this.#date <= 7) || (this.#date >= 10 && this.#date <= 14) || (this.#date >= 17 && this.#date <= 21) || (this.#date >= 24 && this.#date <= 28) || (this.#date >= 31)) {
-      const discount = menuDiscountCalculator('디저트', this.#order);
+      const discount = menuDiscountCalculator(CATEGORIES.dessert, this.#order);
       this.#weekdayDiscount += discount;
     }
   }
 
   async #calculateSpecialDiscount() {
     if ((this.#date == 3 || this.#date == 10 || this.#date == 17 || this.#date == 24 || this.#date == 25 || this.#date == 31)){
-      this.#specialDiscount = 1000;
+      this.#specialDiscount = MONEY.thousand;
     }
   }
 
   async #calculateChristmasDiscount() {
     if (this.#date <= 25 && this.#date >= 1) {
-      const discount = (this.#date - 1) * 100;
-      this.#christmasDiscount = discount + 1000;
+      const discount = (this.#date - 1) * MONEY.christmasDiscountUnit;
+      this.#christmasDiscount = discount + MONEY.thousand;
     }
   }
   
   async #calculateTotalDiscount() { 
     this.#totalDiscount = this.#weekendDiscount + this.#weekdayDiscount + this.#specialDiscount + this.#christmasDiscount;
     if (this.#order.getIsPresent()) {
-      this.#totalDiscount += 25000;
+      this.#totalDiscount += MONEY.presentPrice;
     }
   }
 
@@ -68,7 +69,7 @@ class Discount {
       '평일 할인': this.#weekdayDiscount,
       '주말 할인': this.#weekendDiscount,
       '특별 할인': this.#specialDiscount,
-      '증정 이벤트': this.#order.getIsPresent() ? 25000 : 0,
+      '증정 이벤트': this.#order.getIsPresent() ? MONEY.presentPrice : MONEY.zero,
     }
     return discount;
   }

@@ -1,17 +1,20 @@
-import { FOODS, MENUS } from '../constants/menus.js';
+import { COMMA, DASH, EMPTY_STRING, ONE, ZERO } from '../constants/constants.js';
+import { CATEGORIES, FOODS, MAX_MENU_COUNT, MENUS } from '../constants/menus.js';
+import { ERROR_MESSEGE } from '../constants/messeges.js';
+import MONEY from '../constants/money.js';
 
 class Order {
   #menuList = [];
   #countList = [];
-  #totalPrice = 0;
-  #isPresent = 0;
+  #totalPrice = MONEY.zero;
+  #isPresent = MONEY.zero;
 
   constructor(orderInput) {
-    const orderInputs = orderInput.split(',');
+    const orderInputs = orderInput.split(COMMA);
     orderInputs.forEach(order => {
-      const menuAndCount = order.split('-');
-      const menu = menuAndCount[0].trim();
-      const count = Number(menuAndCount[1]);
+      const menuAndCount = order.split(DASH);
+      const menu = menuAndCount[ZERO].trim();
+      const count = Number(menuAndCount[ONE]);
       this.#validateElement(menu, count);
       this.#menuList.push(menu);
       this.#countList.push(count);
@@ -28,49 +31,49 @@ class Order {
   }
 
   #validateMenu(menu) {
-    if (menu === '' || !FOODS.includes(menu)) {
-      throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+    if (menu === EMPTY_STRING || !FOODS.includes(menu)) {
+      throw new Error(ERROR_MESSEGE.INVALID_ORDER);
     }
   }
 
   #validateCountNumber(count) {
-    if (Number.isNaN(count) || count < 1) {
-      throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+    if (Number.isNaN(count) || count < ONE) {
+      throw new Error(ERROR_MESSEGE.INVALID_ORDER);
     }
    }
 
   #validateBeverageOnly(menuList) {
-    const isBeverageOnly = menuList.every(menu => MENUS['음료'].hasOwnProperty(menu));
+    const isBeverageOnly = menuList.every(menu => MENUS[CATEGORIES.drink].hasOwnProperty(menu));
     if (isBeverageOnly) {
-      throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+      throw new Error(ERROR_MESSEGE.INVALID_ORDER);
     }
   }
 
   #validateRedundantMenu(menuList, menu) { 
     if (menuList.includes(menu)) { 
-      throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+      throw new Error(ERROR_MESSEGE.INVALID_ORDER);
     }
   }
 
   #validateMaxCount(countList, count) {
     let presentMenuCount = countList.reduce((accumulator, currentValue) => {
       return accumulator + currentValue;
-    }, 0);
+    }, ZERO);
     presentMenuCount += count;
-    if (presentMenuCount >= 21) {
-      throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+    if (presentMenuCount >= MAX_MENU_COUNT) {
+      throw new Error(ERROR_MESSEGE.INVALID_ORDER);
     }
   }
   
 
   async #calculatePresent() { 
-    if (this.#totalPrice >= 120000) {
-      this.#isPresent = 1;
+    if (this.#totalPrice >= MONEY.getPresentPrice) {
+      this.#isPresent = ONE;
     }
   }
 
   async #setTotalPrice(category, menus) {
-    for (let j = 0; j < menus.length; j++) {
+    for (let j = ZERO; j < menus.length; j++) {
       const menu = menus[j];
       if (this.#menuList.includes(menu)) {
         const price = MENUS[category][menu];
@@ -83,7 +86,7 @@ class Order {
 
   async #calculatePrice() {
     const categorys = Object.keys(MENUS);
-    for (let i = 0; i < categorys.length; i++) {
+    for (let i = ZERO; i < categorys.length; i++) {
       const category = categorys[i];
       const menus = Object.keys(MENUS[category]);
       this.#setTotalPrice(category,menus);
