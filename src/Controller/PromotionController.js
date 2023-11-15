@@ -11,9 +11,7 @@ class PromotionController {
   #discount;
   #badge;
 
-  constructor() {
-    
-  }
+  constructor() {}
 
   async reInput(func) {
     try {
@@ -36,7 +34,6 @@ class PromotionController {
     await this.calculateBadge();
   }
 
-
   async inputDate() {
     const input = await InputView.readDate();
     this.#date = input;
@@ -47,14 +44,12 @@ class PromotionController {
     this.#order = new Order(orederInput);
   }
 
-
   async calculateDiscount() {
     this.#discount = new Discount(this.#order, this.#date);
     await this.#discount.calculateDiscount();
     OutputView.printBenefit(this.#discount.getDiscount());
     OutputView.printTotalBenefit(this.#discount.getTotalDiscount());
   }
-
 
   async calculatePayment() {
     const totalPrice = this.#order.getTotalPrice();
@@ -69,9 +64,6 @@ class PromotionController {
     OutputView.printBadge(this.#badge.getBadge());
   }
 
-  getOrders() {
-    return this.#order;
-  }
 }
 
 export default PromotionController;
