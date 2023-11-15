@@ -1,3 +1,5 @@
+import { ONE } from '../constants/constants.js';
+import DATE from '../constants/date.js';
 import { CATEGORIES } from '../constants/menus.js';
 import MONEY from '../constants/money.js';
 import { menuDiscountCalculator } from '../utils/menuDiscountCalculator.js';
@@ -29,7 +31,7 @@ class Discount {
 
 
   async #calculateWeekendDiscount() {
-    if ((this.#date >= 1 && this.#date <= 2) || (this.#date >= 8 && this.#date <= 9) || (this.#date >= 15 && this.#date <= 16) || (this.#date >= 22 && this.#date <= 23) || (this.#date >= 29 && this.#date <= 30)) {
+    if ((this.#date >= DATE.firstDay && this.#date <= DATE.TWO) || (this.#date >= DATE.EIGHT && this.#date <= DATE.NINE) || (this.#date >= DATE.FIFTEEN && this.#date <= DATE.SIXTEEN) || (this.#date >= DATE.TWENTY_TWO && this.#date <= DATE.TWENTY_THREE) || (this.#date >= DATE.TWENTY_NINE && this.#date <= DATE.THIRTY)) {
       const discount = menuDiscountCalculator(CATEGORIES.main, this.#order);
       this.#weekendDiscount += discount;
     }
@@ -37,21 +39,21 @@ class Discount {
   }
 
   async #calculateWeekdayDiscount() { 
-    if ((this.#date >= 3 && this.#date <= 7) || (this.#date >= 10 && this.#date <= 14) || (this.#date >= 17 && this.#date <= 21) || (this.#date >= 24 && this.#date <= 28) || (this.#date >= 31)) {
+    if ((this.#date >= DATE.THREE && this.#date <= DATE.SEVEN) || (this.#date >= DATE.TEN && this.#date <= DATE.FOURTEEN) || (this.#date >= DATE.SEVENTEEN && this.#date <= DATE.TWENTY_ONE) || (this.#date >= DATE.TWENTY_FOUR && this.#date <= DATE.TWENTY_EIGHT) || (this.#date >= DATE.lastDay)) {
       const discount = menuDiscountCalculator(CATEGORIES.dessert, this.#order);
       this.#weekdayDiscount += discount;
     }
   }
 
   async #calculateSpecialDiscount() {
-    if ((this.#date == 3 || this.#date == 10 || this.#date == 17 || this.#date == 24 || this.#date == 25 || this.#date == 31)){
+    if ((this.#date == DATE.THREE || this.#date == DATE.TEN || this.#date == DATE.SEVENTEEN || this.#date == DATE.TWENTY_FOUR || this.#date == DATE.TWENTY_FIVE || this.#date == DATE.lastDay)){
       this.#specialDiscount = MONEY.thousand;
     }
   }
 
   async #calculateChristmasDiscount() {
-    if (this.#date <= 25 && this.#date >= 1) {
-      const discount = (this.#date - 1) * MONEY.christmasDiscountUnit;
+    if (this.#date <= DATE.TWENTY_FIVE && this.#date >= DATE.firstDay) {
+      const discount = (this.#date - ONE) * MONEY.christmasDiscountUnit;
       this.#christmasDiscount = discount + MONEY.thousand;
     }
   }
@@ -78,6 +80,7 @@ class Discount {
     return this.#totalDiscount;
   }
 }
+
 
 
 export default Discount;
