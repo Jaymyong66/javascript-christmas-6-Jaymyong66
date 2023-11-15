@@ -172,8 +172,14 @@ describe("도메인 테스트", () => {
       },
       {input: "초코케이크-1", expected: '없음', date: "3"
       },
-      {input: "양송이수프-1", expected: '없음', date: "3"
+      {input: "초코케이크-2", expected: '별', date: "10"
       },
+      {input: "아이스크림-2", expected: '별', date: "10"
+      },
+      {input: "크리스마스파스타-3,해산물파스타-1", expected: '트리', date: "15"
+      },
+      {input: "초코케이크-2,아이스크림-2", expected: '트리', date: "24"
+      }
     ];
     test.each(badgeCases)('12월 이벤트 배지 테스트', async ({ input,expected,date }) => {
       //when
