@@ -8,6 +8,13 @@ class Discount {
   #order;
   #date;
   #discounts = new Map();
+  /* #discounts = {
+        weekendDiscount,
+        weekdayDiscount,
+        specialDiscount,
+        christmasDiscount,
+        totalDiscount
+      }*/
 
   constructor(order, date) {
     this.#order = order;
