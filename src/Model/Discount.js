@@ -20,7 +20,7 @@ class Discount {
   }
 
   async calculateDiscount() {
-    const isDiscount = this.#order.getTotalPrice() >= MONEY.minimunBenefitPrice;
+    const isDiscount = this.#order.isOverMinimumBenefitPrice();
     if (isDiscount) {
       await this.#calculateWeekendDiscount();
       await this.#calculateWeekdayDiscount();

@@ -94,6 +94,10 @@ class Order {
     this.#calculatePresent();
   }
 
+  isOverMinimumBenefitPrice() {
+    return this.#totalPrice >= MONEY.minimumBenefitPrice;
+  }
+
   getMenus() {
     return this.#menuList;
   }
