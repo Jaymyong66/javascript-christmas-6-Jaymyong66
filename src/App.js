@@ -1,5 +1,15 @@
+import PromotionController from './Controller/PromotionController.js';
+
 class App {
-  async run() {}
+  #promotionController;
+
+  constructor() {
+    this.#promotionController = new PromotionController();
+  }
+
+  async run() {
+      await this.#promotionController.run();
+  }
 }
 
 export default App;
